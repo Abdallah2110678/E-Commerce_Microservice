@@ -1,0 +1,10 @@
+D:\projects\Konecta\E-Commerce_Microservice\product-service\src\main\java\com\ecommerce\product\config\RabbitMQConfig.java
+D:\projects\Konecta\E-Commerce_Microservice\product-service\src\main\java\com\ecommerce\product\controller\ProductController.java
+D:\projects\Konecta\E-Commerce_Microservice\product-service\src\main\java\com\ecommerce\product\ProductServiceApplication.java
+D:\projects\Konecta\E-Commerce_Microservice\product-service\src\main\java\com\ecommerce\product\config\OpenApiConfig.java
+D:\projects\Konecta\E-Commerce_Microservice\product-service\src\main\java\com\ecommerce\product\repository\ProductRepository.java
+D:\projects\Konecta\E-Commerce_Microservice\product-service\src\main\java\com\ecommerce\product\messaging\StockEventListener.java
+D:\projects\Konecta\E-Commerce_Microservice\product-service\src\main\java\com\ecommerce\product\entity\Product.java
+D:\projects\Konecta\E-Commerce_Microservice\product-service\src\main\java\com\ecommerce\product\service\ProductService.java
+D:\projects\Konecta\E-Commerce_Microservice\product-service\src\main\java\com\ecommerce\product\dto\StockReservationRequest.java
+D:\projects\Konecta\E-Commerce_Microservice\product-service\src\main\java\com\ecommerce\product\dto\ProductDto.java

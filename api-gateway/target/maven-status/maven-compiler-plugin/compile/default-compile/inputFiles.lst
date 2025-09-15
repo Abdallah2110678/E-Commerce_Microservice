@@ -1,0 +1,5 @@
+D:\projects\Konecta\E-Commerce_Microservice\api-gateway\src\main\java\com\ecommerce\gateway\ApiGatewayApplication.java
+D:\projects\Konecta\E-Commerce_Microservice\api-gateway\src\main\java\com\ecommerce\gateway\filter\JwtAuthenticationFilter.java
+D:\projects\Konecta\E-Commerce_Microservice\api-gateway\src\main\java\com\ecommerce\gateway\config\GatewayConfig.java
+D:\projects\Konecta\E-Commerce_Microservice\api-gateway\src\main\java\com\ecommerce\gateway\config\CorsConfig.java
+D:\projects\Konecta\E-Commerce_Microservice\api-gateway\src\main\java\com\ecommerce\gateway\controller\FallbackController.java

@@ -1,0 +1,398 @@
+{
+  "backend_testing_urls": {
+    "description": "Complete list of backend microservices Swagger and testing URLs",
+    "primary_services": {
+      "api_gateway": {
+        "name": "API Gateway (Main Entry Point)",
+        "port": 8080,
+        "status": "running",
+        "swagger_ui": "http://localhost:8080/swagger-ui/index.html",
+        "api_docs": "http://localhost:8080/v3/api-docs",
+        "description": "Main entry point for all API requests"
+      },
+      "auth_service": {
+        "name": "Authentication Service",
+        "port": 8081,
+        "status": "running",
+        "swagger_ui": "http://localhost:8081/swagger-ui/index.html",
+        "api_docs": "http://localhost:8081/v3/api-docs",
+        "description": "User authentication and JWT token management"
+      },
+      "product_service": {
+        "name": "Product Service",
+        "port": 8082,
+        "status": "running",
+        "swagger_ui": "http://localhost:8082/swagger-ui/index.html",
+        "api_docs": "http://localhost:8082/v3/api-docs",
+        "description": "Product catalog management"
+      },
+      "order_service": {
+        "name": "Order Service",
+        "port": 8083,
+        "status": "running",
+        "swagger_ui": "http://localhost:8083/swagger-ui/index.html",
+        "api_docs": "http://localhost:8083/v3/api-docs",
+        "description": "Order processing and management"
+      },
+      "cart_service": {
+        "name": "Cart Service (.NET)",
+        "port": 5001,
+        "status": "running",
+        "swagger_ui": "http://localhost:5001/swagger/index.html",
+        "api_docs": "http://localhost:5001/swagger/v1/swagger.json",
+        "description": "Shopping cart management with Redis TTL"
+      },
+      "payment_service": {
+        "name": "Payment Service (.NET)",
+        "port": 5002,
+        "status": "running",
+        "swagger_ui": "http://localhost:5002/swagger/index.html",
+        "api_docs": "http://localhost:5002/swagger/v1/swagger.json",
+        "description": "Payment processing and transactions"
+      }
+    },
+    "infrastructure_services": {
+      "discovery_service": {
+        "name": "Eureka Discovery Service",
+        "port": 8761,
+        "status": "running",
+        "dashboard": "http://localhost:8761",
+        "description": "Service registry and discovery"
+      },
+      "config_server": {
+        "name": "Config Server",
+        "port": 8888,
+        "status": "running",
+        "health": "http://localhost:8888/actuator/health",
+        "description": "Centralized configuration management"
+      }
+    },
+    "monitoring_services": {
+      "prometheus": {
+        "name": "Prometheus",
+        "port": 9090,
+        "status": "running",
+        "dashboard": "http://localhost:9090",
+        "description": "Metrics collection and monitoring"
+      },
+      "grafana": {
+        "name": "Grafana",
+        "port": 3000,
+        "status": "running",
+        "dashboard": "http://localhost:3000",
+        "description": "Metrics visualization and dashboards",
+        "credentials": {
+          "username": "admin",
+          "password": "admin",
+          "note": "You'll be prompted to change password on first login"
+        }
+      },
+      "rabbitmq": {
+        "name": "RabbitMQ",
+        "port": 15672,
+        "status": "running",
+        "management": "http://localhost:15672",
+        "description": "Message broker management interface",
+        "credentials": {
+          "username": "rabbitmq_user",
+          "password": "rabbitmq_password"
+        }
+      }
+    },
+    "key_endpoints": {
+      "authentication": {
+        "signup": {
+          "method": "POST",
+          "url": "http://localhost:8080/auth/signup",
+          "description": "Register new user",
+          "sample_request": {
+            "username": "testuser",
+            "email": "test@example.com",
+            "password": "password123",
+            "role": ["admin"]
+          },
+          "note": "Role should be array with lowercase values: ['admin'] or ['customer'] or empty for default customer"
+        },
+        "signin": {
+          "method": "POST",
+          "url": "http://localhost:8080/auth/signin",
+          "description": "Login user and get JWT token",
+          "sample_request": {
+            "username": "testuser",
+            "password": "password123"
+          },
+          "note": "Returns JWT token for authenticated requests"
+        }
+      },
+      "products": {
+        "get_all": {
+          "method": "GET",
+          "url": "http://localhost:8080/api/products",
+          "description": "Get all products with pagination"
+        },
+        "get_by_id": {
+          "method": "GET",
+          "url": "http://localhost:8080/api/products/{id}",
+          "description": "Get product by ID"
+        },
+        "get_by_category": {
+          "method": "GET",
+          "url": "http://localhost:8080/api/products/category/{category}",
+          "description": "Get products by category"
+        }
+      },
+      "cart": {
+        "get_cart": {
+          "method": "GET",
+          "url": "http://localhost:8080/api/cart/{userId}",
+          "description": "Get user cart items"
+        },
+        "add_to_cart": {
+          "method": "POST",
+          "url": "http://localhost:8080/api/cart/add",
+          "description": "Add item to cart"
+        },
+        "update_cart_item": {
+          "method": "PUT",
+          "url": "http://localhost:8080/api/cart/{userId}/items/{cartItemId}",
+          "description": "Update cart item quantity"
+        },
+        "remove_cart_item": {
+          "method": "DELETE",
+          "url": "http://localhost:8080/api/cart/{userId}/items/{cartItemId}",
+          "description": "Remove item from cart"
+        }
+      },
+      "orders": {
+        "get_user_orders": {
+          "method": "GET",
+          "url": "http://localhost:8080/api/orders/user/{userId}",
+          "description": "Get all orders for a user"
+        },
+        "create_order": {
+          "method": "POST",
+          "url": "http://localhost:8080/api/orders",
+          "description": "Create new order"
+        },
+        "get_order_by_id": {
+          "method": "GET",
+          "url": "http://localhost:8080/api/orders/{orderId}",
+          "description": "Get order by ID"
+        }
+      },
+      "payments": {
+        "process_payment": {
+          "method": "POST",
+          "url": "http://localhost:8080/api/payments/process",
+          "description": "Process payment for order"
+        },
+        "get_payment_status": {
+          "method": "GET",
+          "url": "http://localhost:8080/api/payments/{paymentId}",
+          "description": "Get payment status"
+        }
+      }
+    },
+    "database_connections": {
+      "postgres_auth": {
+        "host": "localhost",
+        "port": 5432,
+        "database": "auth_db",
+        "description": "Authentication service database"
+      },
+      "mysql_product": {
+        "host": "localhost",
+        "port": 3306,
+        "database": "product_db",
+        "description": "Product service database"
+      },
+      "postgres_order": {
+        "host": "localhost",
+        "port": 5433,
+        "database": "order_db",
+        "description": "Order service database"
+      },
+      "redis_cart": {
+        "host": "localhost",
+        "port": 6379,
+        "description": "Cart service Redis cache"
+      },
+      "sqlserver_payment": {
+        "host": "localhost",
+        "port": 1433,
+        "database": "payment_db",
+        "description": "Payment service database"
+      }
+    },
+    "all_credentials": {
+      "monitoring_services": {
+        "grafana": {
+          "url": "http://localhost:3000",
+          "username": "admin",
+          "password": "admin",
+          "note": "Default admin credentials - change on first login"
+        },
+        "rabbitmq_management": {
+          "url": "http://localhost:15672",
+          "username": "rabbitmq_user",
+          "password": "rabbitmq_password"
+        },
+        "prometheus": {
+          "url": "http://localhost:9090",
+          "note": "No authentication required"
+        }
+      },
+      "databases": {
+        "mysql_product": {
+          "host": "localhost:3306",
+          "database": "productdb",
+          "username": "product_user",
+          "password": "product_password",
+          "root_password": "rootpassword"
+        },
+        "postgres_auth": {
+          "host": "localhost:5432",
+          "database": "authdb",
+          "username": "auth_user",
+          "password": "auth_password"
+        },
+        "postgres_order": {
+          "host": "localhost:5433",
+          "database": "orderdb",
+          "username": "order_user",
+          "password": "order_password"
+        },
+        "sqlserver_payment": {
+          "host": "localhost:1433",
+          "database": "PaymentDB",
+          "username": "sa",
+          "password": "PaymentPassword123!"
+        },
+        "redis_cache": {
+          "host": "localhost:6379",
+          "note": "No authentication configured"
+        }
+      },
+      "messaging": {
+        "rabbitmq": {
+          "host": "localhost:5672",
+          "username": "rabbitmq_user",
+          "password": "rabbitmq_password",
+          "note": "For application connections (not management UI)"
+        }
+      }
+    },
+    "testing_workflow": {
+      "note": "✅ Swagger UI is now working for .NET services! Java services use direct endpoints:",
+      "step_1": "Test authentication: POST http://localhost:8080/api/auth/signup and signin",
+      "step_2": "Test products: GET http://localhost:8080/api/products",
+      "step_3": "Test cart operations: http://localhost:5001/api/cart/{userId}",
+      "step_4": "Test orders: http://localhost:8080/api/orders",
+      "step_5": "Test payments: http://localhost:5002/api/payments",
+      "step_6": "Use health endpoints for service status checks",
+      "step_7": "All endpoints return JSON responses - test with curl, Postman, or similar tools"
+    },
+    "working_api_endpoints": {
+      "authentication": {
+        "base_url": "http://localhost:8080/api/auth",
+        "signup": {
+          "method": "POST",
+          "url": "http://localhost:8080/api/auth/signup",
+          "sample_request": {
+            "username": "testuser",
+            "email": "test@example.com",
+            "password": "password123",
+            "role": ["admin"]
+          }
+        },
+        "signin": {
+          "method": "POST", 
+          "url": "http://localhost:8080/api/auth/signin",
+          "sample_request": {
+            "username": "testuser",
+            "password": "password123"
+          }
+        }
+      },
+      "products": {
+        "base_url": "http://localhost:8080/api/products",
+        "get_all": {
+          "method": "GET",
+          "url": "http://localhost:8080/api/products",
+          "description": "Returns paginated product list - currently working ✅"
+        },
+        "get_by_id": {
+          "method": "GET",
+          "url": "http://localhost:8080/api/products/{id}",
+          "description": "Get specific product by ID"
+        }
+      },
+      "cart": {
+        "base_url": "http://localhost:5001/api/cart",
+        "swagger_ui": "http://localhost:5001/swagger/index.html ✅ WORKING",
+        "get_cart": {
+          "method": "GET",
+          "url": "http://localhost:5001/api/cart/{userId}",
+          "description": "Get user cart - currently working ✅"
+        },
+        "add_item": {
+          "method": "POST",
+          "url": "http://localhost:5001/api/cart/add",
+          "sample_request": {
+            "userId": 1,
+            "productId": 1,
+            "quantity": 2
+          }
+        }
+      },
+      "orders": {
+        "base_url": "http://localhost:8080/api/orders",
+        "get_orders": {
+          "method": "GET",
+          "url": "http://localhost:8080/api/orders",
+          "description": "Get user orders (requires authentication)"
+        },
+        "create_order": {
+          "method": "POST", 
+          "url": "http://localhost:8080/api/orders",
+          "description": "Create new order from cart"
+        }
+      },
+      "payments": {
+        "base_url": "http://localhost:5002/api/payments",
+        "swagger_ui": "http://localhost:5002/swagger/index.html ✅ WORKING",
+        "process_payment": {
+          "method": "POST",
+          "url": "http://localhost:5002/api/payment/process",
+          "sample_request": {
+            "orderId": 1,
+            "userId": 1,
+            "amount": 1119.95,
+            "paymentMethod": "credit_card",
+            "paymentGateway": "stripe",
+            "currency": "USD",
+            "notes": "Test payment for cart checkout"
+          }
+        },
+        "health": {
+          "method": "GET",
+          "url": "http://localhost:5002/api/payment/health",
+          "description": "Payment service health check"
+        }
+      }
+    },
+    "health_endpoints": {
+      "api_gateway": "http://localhost:8080/actuator/health",
+      "auth_service": "http://localhost:8081/actuator/health", 
+      "product_service": "http://localhost:8082/actuator/health",
+      "order_service": "http://localhost:8083/actuator/health",
+      "cart_service": "http://localhost:5001/health",
+      "payment_service": "http://localhost:5002/health"
+    },
+    "frontend_application": {
+      "url": "http://localhost:4200",
+      "status": "running",
+      "description": "Angular frontend application with PrimeNG"
+    }
+  }
+}
